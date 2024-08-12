@@ -17,7 +17,7 @@ features = outputs / 'features.h5'
 matches = outputs / 'matches.h5'
 
 feature_conf = extract_features.confs['sift']
-matcher_conf = match_features.confs['superpoint+lightglue']
+matcher_conf = match_features.confs['disk+lightglue']
 
 references = [str(p.relative_to(images)) for p in (images).iterdir()]
 
