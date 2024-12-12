@@ -1,6 +1,9 @@
 FROM colmap/colmap:latest
 MAINTAINER Paul-Edouard Sarlin
-ARG PYTHON_VERSION=3.8
+ARG PYTHON_VERSION=3.10
+# configuring tzdata
+ENV TZ=Europe/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-key del 7fa2af80
 RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/3bf863cc.pub
 RUN apt-get update -y
@@ -10,8 +13,14 @@ RUN add-apt-repository ppa:deadsnakes/ppa && \
     apt-get install -y python${PYTHON_VERSION}
 RUN wget https://bootstrap.pypa.io/get-pip.py && python${PYTHON_VERSION} get-pip.py
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1
+RUN apt -y install git
+RUN git clone --recursive https://github.com/cvg/Hierarchical-Localization/
+RUN python3 -m pip install -e Hierarchical-Localization/
+RUN cd
 COPY . /app
 WORKDIR app/
+RUN apt remove -y python3-blinker
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 RUN pip3 install notebook
+

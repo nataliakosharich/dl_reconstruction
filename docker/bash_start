@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+DIRECT=`readlink -f ../Readme | xargs dirname`
+
+#Start container in background
+xhost +local:root
+sudo docker run --name dl_docker -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $DIRECT/workspace:/app/workspace -v $DIRECT/hloc:/Hierarchical-Localization/hloc -v /mnt/dockershm:/dev/shm --rm --runtime=nvidia --gpus all dl_docker colmap gui &
+#Wait to start
+sleep 3
+#Enter container
+./bash_enter

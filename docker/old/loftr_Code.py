@@ -11,7 +11,7 @@ from hloc import (
 from hloc.visualization import plot_images, read_image
 from hloc.utils import viz_3d
 
-images = Path("datasets/South Building/")
+images = Path("rec_data/south-building/")
 
 
 outputs = Path("outputs/")

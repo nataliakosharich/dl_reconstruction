@@ -7,9 +7,10 @@ matplotlib
 plotly
 scipy
 h5py
-pycolmap>=0.3.0
-kornia>=0.6.7
+pycolmap>=0.6.0
+kornia>=0.6.11
 gdown
 ipywidgets
 open3d
 scikit-learn
+lightglue @ git+https://github.com/cvg/LightGlue
